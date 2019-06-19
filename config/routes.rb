@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'sessions/new'
-  get 'sessions/create'
-  get 'sessions/destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'toppages#index'
   #デバッグ用
@@ -16,5 +13,5 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   
   get 'signup', to: 'taskusers#new'
-  resources :taskusers, only: [:index, :show, :new, :create]
+  resources :taskusers, only: [:new, :create]
 end
