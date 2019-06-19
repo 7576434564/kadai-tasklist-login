@@ -20,7 +20,7 @@ class TasksController < ApplicationController
       redirect_to root_url
     else
       flash.now[:danger] = 'タスクの投稿に失敗しました。'
-      render 'toppages/index'
+      render :new
     end
       
   end
