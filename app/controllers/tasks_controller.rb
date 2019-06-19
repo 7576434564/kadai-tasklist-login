@@ -14,11 +14,13 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
-      redirect_to @task
+      flash[:success] = 'タスクを投稿しました。'
+      redirect_to root_url
     else
-      render :new
+      flash.now[:danger] = 'タスクの投稿に失敗しました。'
+      render 'toppages/index'
     end
       
   end
@@ -29,8 +31,10 @@ class TasksController < ApplicationController
   def update
       
     if @task.update(task_params)
+      flash[:success] = 'タスクを編集しました。'
       redirect_to @task
     else
+      flash.now[:danger] = 'タスクの編集に失敗しました。'
       render :edit
     end
   end
@@ -38,8 +42,8 @@ class TasksController < ApplicationController
   def destroy
       
     @task.destroy
-    
-    redirect_to tasks_url
+    flash[:success] = 'タスクを消去しました。'
+    redirect_to root_url
   end
   
   private

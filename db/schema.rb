@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_29_125131) do
+ActiveRecord::Schema.define(version: 2019_06_08_121923) do
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
+    t.bigint "taskuser_id"
+    t.index ["taskuser_id"], name: "index_tasks_on_taskuser_id"
   end
 
   create_table "taskusers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -27,4 +29,5 @@ ActiveRecord::Schema.define(version: 2019_05_29_125131) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "tasks", "taskusers"
 end
